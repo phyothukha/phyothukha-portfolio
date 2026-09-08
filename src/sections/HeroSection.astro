@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import phyothukha from "@/assets/phyothukha.png";
 ---
 
@@ -14,7 +15,7 @@ import phyothukha from "@/assets/phyothukha.png";
     class="w-full flex flex-col items-center lg:justify-start justify-evenly"
   >
     <div
-      class="flex md:flex-row items-center md:pb-40 pb-10 flex-col-reverse gap-5 font-Roboto container max-w-6xl mx-auto lg:gap-5 justify-center flex-wrap-reverse min-h-[769px] lg:px-0 px-10"
+      class="flex md:flex-row items-center md:pb-40 pb-10 flex-col-reverse gap-5 font-Ubuntu container max-w-6xl mx-auto lg:gap-5 justify-center flex-wrap-reverse min-h-[769px] lg:px-0 px-10"
     >
       <article
         id="hero-text"
@@ -43,7 +44,7 @@ import phyothukha from "@/assets/phyothukha.png";
           </span>
         </h2>
         <p
-          class="font-normal tracking-widest selection:text-primary dark:selection:text-darkary font-Ubuntu text-xs lg:text-sm"
+          class="font-normal leading-relaxed selection:text-primary dark:selection:text-darkary font-Ubuntu text-sm lg:text-base"
         >
           I am a Full-stack developer skilled in handling diverse projects,
           learning new technologies, and solving user problems effectively.
@@ -66,9 +67,12 @@ import phyothukha from "@/assets/phyothukha.png";
       <aside
         class="dark:bg-secondary bg-wtsecondary bg-opacity-70 lg:w-[450px] w-[300px] h-[300px] lg:h-[450px] rounded-full transition ease-in-out duration-500 cursor-pointer overflow-hidden dark:shadow-3xl shadow-5xl hover:shadow-6xl dark:hover:shadow-4xl"
       >
-        <img
-          src={phyothukha.src}
+        <Image
+          src={phyothukha}
           draggable="false"
+          loading="eager"
+          fetchpriority="high"
+          quality={90}
           class="mt-20 select-none object-contain mx-auto lg:w-[400px] w-[250px] h-[250px] lg:h-[400px]"
           alt="Phyo Thu Kha photo"
         />

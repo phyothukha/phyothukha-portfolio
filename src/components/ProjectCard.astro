@@ -1,11 +1,14 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   index: number;
   project: {
     id: number;
     name: string;
     description: string;
-    image: string;
+    image: ImageMetadata;
+    alt: string;
     tags: string[];
     liveUrl: string;
     sourceCode: string;
@@ -18,21 +21,30 @@ const { index, project } = Astro.props;
 <div class="project-card-wrapper md:basis-1/2 md:px-8 py-2 md:py-4">
   <div class={`project-card project-card-${index}`}>
     <div class="overflow-hidden">
-      <div class="project-image relative aspect-[16/9]" set:html={project.image} />
+      <div class="project-image relative aspect-[16/9]">
+        <Image
+          src={project.image}
+          alt={project.alt}
+          widths={[400, 800]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          class="absolute inset-0 h-full w-full transition-transform duration-500 hover:scale-110 object-cover"
+        />
+      </div>
     </div>
     <div class="overflow-hidden">
       <div class="project-text flex items-center justify-between">
-        <h3
+        <h2
           class="text-wtsecondary dark:text-secondary text-lg my-1 font-Poetsen dark:selection:text-black  selection:text-white"
         >
           {project.name}
-        </h3>
+        </h2>
         <div
           class="flex items-center space-x-5 sm:space-x-3 my-2 sm:my-0 mr-[0.1rem]"
         >
           <a
             href={project.sourceCode}
             title={`See '${project.name}' on Github`}
+            aria-label={`See '${project.name}' on Github`}
             target="_blank"
             rel="noreferrer"
             class=" focus-visible:outline-secondary"
@@ -41,6 +53,7 @@ const { index, project } = Astro.props;
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
+              aria-hidden="true"
               class="scale-150 sm:scale-125 opacity-75 hover:-rotate-12 fill-black dark:fill-bglight"
             >
               <path
@@ -53,6 +66,7 @@ const { index, project } = Astro.props;
           <a
             href={project.liveUrl}
             title={`See live demo of '${project.name}'`}
+            aria-label={`See live demo of '${project.name}'`}
             target="_blank"
             rel="noreferrer"
           >
@@ -63,6 +77,7 @@ const { index, project } = Astro.props;
               viewBox="0 0 24 24"
               stroke="currentColor"
               stroke-width="2"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -76,7 +91,7 @@ const { index, project } = Astro.props;
     </div>
     <div class="overflow-hidden">
       <p
-        class="project-desc font-semibold font-Poppins text-sm text-gray-500  dark:text-gray-200   dark:selection:text-black  selection:text-white"
+        class="project-desc font-normal leading-relaxed font-Ubuntu text-sm text-gray-600  dark:text-gray-200   dark:selection:text-black  selection:text-white"
       >
         {project.description.substring(0, 200)}...
       </p>

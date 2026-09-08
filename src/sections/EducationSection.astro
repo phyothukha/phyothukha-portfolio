@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import timelimebg from "@/assets/timelimebg.svg";
 import timelimebgwt from "@/assets/timelimebg-wt.svg";
 import about from "@/assets/bb.jpg";
@@ -12,6 +13,7 @@ import about from "@/assets/bb.jpg";
     <img
       src={timelimebg.src}
       alt="timeline background"
+      loading="lazy"
       class="max-w-none object-cover object-center w-[2000px] h-auto"
     />
   </div>
@@ -19,10 +21,11 @@ import about from "@/assets/bb.jpg";
     <img
       src={timelimebgwt.src}
       alt="timeline white background"
+      loading="lazy"
       class="max-w-none object-cover object-center w-[2000px] h-auto"
     />
   </div>
-  <div class="container mx-auto max-w-7xl relative z-30 lg:px-0 px-10">
+  <div class="container mx-auto max-w-6xl relative z-30 lg:px-0 px-10">
     <h1 id="education-title" class="text-4xl font-bold">Education</h1>
     <div class="lg:px-28 mt-20">
       <div
@@ -44,27 +47,27 @@ import about from "@/assets/bb.jpg";
               Hello!
             </h2>
             <p
-              class="text-primary font-normal text-xs mb-2 dark:selection:text-darkary"
+              class="text-primary font-normal text-sm lg:text-base leading-relaxed mb-4 dark:selection:text-darkary"
             >
               My name is <span class="text-secondary">Phyo Thu Kha</span> and I
               specialize in web development that utilizes HTML, CSS, JS, and
               <span class="text-secondary">REACT</span> etc.
             </p>
             <p
-              class="text-primary font-normal text-xs mb-2 dark:selection:text-darkary"
+              class="text-primary font-normal text-sm lg:text-base leading-relaxed mb-4 dark:selection:text-darkary"
             >
               I am a highly motivated individual and eternal optimist
               dedicated to writing clear, concise, robust code that works.
               Striving to never stop learning and improving.
             </p>
             <p
-              class="text-primary font-normal text-xs mb-2 dark:selection:text-darkary"
+              class="text-primary font-normal text-sm lg:text-base leading-relaxed mb-4 dark:selection:text-darkary"
             >
               When I'm not coding, I am writing blogs, reading, or picking up
               some new hands-on art project like photography.
             </p>
             <p
-              class="text-primary font-normal text-xs mb-2 dark:selection:text-darkary"
+              class="text-primary font-normal text-sm lg:text-base leading-relaxed mb-4 dark:selection:text-darkary"
             >
               I like to have my perspective and belief systems challenged so
               that I see the world through new eyes.
@@ -76,11 +79,12 @@ import about from "@/assets/bb.jpg";
             id="education-image"
             class="overflow-hidden h-full w-full bg-primary border-2 border-wtsecondary dark:border-secondary rounded-xl cursor-pointer transition duration-500 ease-in-out"
           >
-            <img
-              src={about.src}
+            <Image
+              src={about}
               alt="about me"
-              width="800"
-              height="500"
+              width={800}
+              height={500}
+              quality={90}
               class="mx-auto object-cover md:object-bottom h-[400px] w-[400px] md:w-[500px]"
             />
           </div>

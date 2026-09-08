@@ -11,9 +11,6 @@ const config: Config = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      Roboto: ["Roboto", "sans-serif"],
-      Poppins: ["Poppins", "sans-serif"],
-      Inter: ["Inter", "sans-serif"],
       Ubuntu: ["Ubuntu", "sans-serif"],
       Fira: ["Fira Mono", "monospace"],
       Poetsen: ["Poetsen One", "sans-serif"],
@@ -25,9 +22,9 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        wtsecondary: "#087e8b",
+        wtsecondary: "#076771",
         wtprimary: "#fffff",
-        ltwtsecondary: "#087e8b1c",
+        ltwtsecondary: "#0767711c",
 
         // dark mode
         secondary: "#00ffee",

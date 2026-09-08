@@ -28,7 +28,7 @@ import { navlinks } from "@/data/navLinks";
               <a
                 href={nav.url}
                 data-nav-link={nav.url.substring(1)}
-                class="text-black dark:text-white transition duration-100 nav-ani font-semibold font-Poppins"
+                class="text-black dark:text-white transition duration-100 nav-ani font-semibold font-Ubuntu"
               >
                 {nav.label}
               </a>
@@ -118,10 +118,12 @@ import { navlinks } from "@/data/navLinks";
     themeBtn.setAttribute("aria-label", next);
   });
 
-  const navLinks = document.querySelectorAll("[data-nav-link]");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>(
+    "[data-nav-link]",
+  );
   const sections = document.querySelectorAll("section");
 
-  const setActive = (id) => {
+  const setActive = (id: string) => {
     navLinks.forEach((a) => {
       const isMobile = a.dataset.mobile === "true";
       const isActive = a.dataset.navLink === id;
