@@ -11,21 +11,15 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.5",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.3.1",
     "gsap": "^3.12.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-rough-notation": "^1.0.5",
     "sharp": "^0.33.5",
     "swiper": "^11.1.15"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.0.1",
     "eslint": "^8.0.0",
     "husky": "^9.0.11",
@@ -39,11 +33,6 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
   },
   "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

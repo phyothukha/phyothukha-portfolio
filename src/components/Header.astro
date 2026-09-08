@@ -1,0 +1,150 @@
+---
+import { navlinks } from "@/data/navLinks";
+---
+
+<header
+  class=" fixed top-0 py-5 backdrop-filter backdrop-blur-[10px] z-50 dark:bg-[rgb(41,47,54,0.3)] bg-[rgba(255,255,255,0.2)] left-0 w-full"
+>
+  <div
+    class=" container max-w-6xl flex mx-auto justify-between px-10 lg:px-0 selection:bg-wtsecondary dark:selection:bg-secondary selection:text-primary dark:selection:text-darkary "
+  >
+    <a
+      href="/"
+      class=" text-xl font-bold font-Poetsen dark:text-white text-black dark:hover:text-secondary hover:text-wtsecondary cursor-pointer transition duration-150 ease hover:scale-95 "
+    >
+      Phyo{" "}
+      <span
+        class=" dark:text-secondary selection:shadow-none text-wtsecondary font-Poetsen"
+        style="text-shadow: 0 0 2px var(--main-color)"
+      >
+        Thu Kha
+      </span>
+    </a>
+    <nav>
+      <ul class=" flex gap-8 items-center w-full font-medium">
+        {
+          navlinks.map((nav) => (
+            <li class=" md:inline-block hidden">
+              <a
+                href={nav.url}
+                data-nav-link={nav.url.substring(1)}
+                class="text-black dark:text-white transition duration-100 nav-ani font-semibold font-Poppins"
+              >
+                {nav.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <button
+            type="button"
+            id="theme-toggle"
+            title="Toggles light & dark theme"
+            aria-live="polite"
+            class="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--main-color)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-sun dark:inline-block hidden"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+              <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+            </svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--second-main-color)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-moon dark:hidden inline-block"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div
+  class=" backdrop-filter backdrop-blur-[10px] md:hidden flex justify-around rounded-xl overflow-hidden dark:bg-[rgba(0,0,0,0.3)] left-[50%] right-[50%] transform translate-x-[-50%] fixed bottom-5  h-20  z-50 w-[90%]"
+>
+  {
+    navlinks.map((nav) => (
+      <a
+        href={nav.url}
+        data-nav-link={nav.url.substring(1)}
+        data-mobile="true"
+        class="dark:text-white text-black transition duration-300 hover:text-wtsecondary dark:hover:text-secondary text-xs p-3 max-w-xl text-center flex flex-col items-center justify-center"
+      >
+        <p class=" text-center" set:html={nav.icon} />
+        <p>{nav.label}</p>
+      </a>
+    ))
+  }
+</div>
+
+<script>
+  const themeBtn = document.getElementById("theme-toggle");
+
+  function currentTheme() {
+    return document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  }
+
+  themeBtn?.setAttribute("aria-label", currentTheme());
+
+  themeBtn?.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.style.colorScheme = next;
+    localStorage.setItem("theme", next);
+    themeBtn.setAttribute("aria-label", next);
+  });
+
+  const navLinks = document.querySelectorAll("[data-nav-link]");
+  const sections = document.querySelectorAll("section");
+
+  const setActive = (id) => {
+    navLinks.forEach((a) => {
+      const isMobile = a.dataset.mobile === "true";
+      const isActive = a.dataset.navLink === id;
+      if (isActive) {
+        a.classList.remove("text-black", "dark:text-white");
+        a.classList.add("text-wtsecondary", "dark:text-secondary");
+        if (isMobile) a.classList.add("font-semibold");
+      } else {
+        a.classList.remove("text-wtsecondary", "dark:text-secondary");
+        a.classList.add("text-black", "dark:text-white");
+        if (isMobile) a.classList.remove("font-semibold");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { root: null, threshold: 0.6 },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+</script>

@@ -1,0 +1,76 @@
+---
+import { projects } from "@/data/project";
+import ProjectCard from "@/components/ProjectCard.astro";
+---
+
+<section id="projects" class="bg-[#00000] bg-opacity-90 py-20">
+  <div class="container mx-auto max-w-5xl lg:px-0 px-10">
+    <h1 id="projects-title" class="text-center text-3xl font-bold">
+      Projects
+    </h1>
+
+    <div class=" flex flex-wrap">
+      {
+        projects.map((project, index) => (
+          <ProjectCard index={index} project={project} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.getElementById("projects");
+  const title = document.getElementById("projects-title");
+
+  gsap.fromTo(
+    section,
+    { opacity: 0 },
+    { opacity: 1, duration: 1.5, ease: "power3.out" },
+  );
+  gsap.fromTo(
+    title,
+    { y: -50, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" },
+  );
+
+  document.querySelectorAll(".project-card-wrapper").forEach((wrapper) => {
+    const q = gsap.utils.selector(wrapper);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "70% bottom",
+      },
+    });
+
+    tl.fromTo(
+      q(".project-image"),
+      { opacity: 0, y: 100 },
+      {
+        opacity: 1,
+        y: 0,
+        ease: "Power3.easeInOut",
+        duration: 0.5,
+        stagger: 0.2,
+      },
+    )
+      .fromTo(q(".project-text"), { y: 100 }, { y: 0, stagger: 0.2 }, "<25%")
+      .fromTo(
+        q(".project-desc"),
+        { opacity: 0 },
+        { opacity: 1, stagger: 0.2 },
+        "<10%",
+      )
+      .fromTo(
+        q(".project-tags"),
+        { y: -40 },
+        { y: 0, stagger: 0.1, ease: "Elastic.easeOut" },
+        "<25%",
+      );
+  });
+</script>

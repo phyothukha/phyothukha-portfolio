@@ -1,0 +1,29 @@
+---
+---
+
+<div
+  id="cursor-dot"
+  class="hidden lg:block w-6 h-6 opacity-0 pointer-events-none rounded-full border-2 border-wtsecondary  z-[9999] fixed -top-3 -left-3"
+/>
+
+<script>
+  import gsap from "gsap";
+
+  const cursor = document.getElementById("cursor-dot");
+
+  document.addEventListener("mousemove", (e) => {
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      opacity: 1,
+      delay: 0,
+    });
+  });
+
+  const hideCursor = () => gsap.to(cursor, { opacity: 0 });
+  const showCursor = () => gsap.to(cursor, { opacity: 1 });
+
+  document.addEventListener("mouseleave", hideCursor);
+  document.addEventListener("mousedown", hideCursor);
+  document.addEventListener("mouseup", showCursor);
+</script>

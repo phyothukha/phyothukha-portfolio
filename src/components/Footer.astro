@@ -1,0 +1,24 @@
+---
+import { footerLink } from "@/data/footer";
+---
+
+<footer class=" container mx-auto max-w-6xl my-5 ">
+  <div class=" flex justify-center gap-10">
+    {
+      footerLink.map(({ id, icon }) => (
+        <div
+          class=" p-3 border-2 dark:border-secondary border-wtsecondary rounded-full cursor-pointer transition-shadow duration-500 dark:shadow-small dark:hover:shadow-medium shadow-wtsmall hover:shadow-wtmedium  "
+          set:html={icon}
+        />
+      ))
+    }
+  </div>
+  <p class="  text-center mt-5">
+    Design By
+    <a href="/">
+      <span class=" dark:text-secondary text-wtsecondary font-light font-Poetsen  cursor-pointer">
+        Phyo Thu Kha
+      </span>
+    </a>
+  </p>
+</footer>
