@@ -36,7 +36,10 @@ import { services, techstacks } from "@/data/services";
     >
       <div class="swiper-wrapper">
         {
-          techstacks.map(({ logo, name, id }) => (
+          // Duplicated so there's always well more than slidesPerView (max 8)
+          // worth of slides — Swiper's loop mode needs that buffer to recycle
+          // slides smoothly, otherwise autoplay stalls after a step or two.
+          [...techstacks, ...techstacks].map(({ logo, name }) => (
             <div class="swiper-slide relative p-5 group overflow-hidden rounded-xl cursor-pointer ">
               <div class=" flex gap-1 h-full items-center">
                 <span set:html={logo} />
@@ -78,7 +81,10 @@ import { services, techstacks } from "@/data/services";
     speed: 2000,
     loop: true,
     freeMode: true,
-    autoplay: { delay: 0, disableOnInteraction: false },
+    // delay must stay a tiny positive number, not 0 — with speed:2000, a
+    // delay of exactly 0 races the next transition against the previous
+    // one's transitionend and permanently stalls the autoplay state machine.
+    autoplay: { delay: 1, disableOnInteraction: false },
     breakpoints: {
       640: { slidesPerView: 4 },
       768: { slidesPerView: 5 },
