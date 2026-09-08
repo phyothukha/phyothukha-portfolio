@@ -1,0 +1,52 @@
+---
+import "@/style/globals.css";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
+const siteUrl = "https://phyothukha-portfolio.vercel.app";
+const title = "Phyo Thu Kha - MERN Stack Developer";
+const description =
+  "I help business grow by crafting amazing web experiences. If you’re looking for a developer that likes to get stuff done.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.png" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Phyo Thu Kha, phyothukha, mern stack developer" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${siteUrl}/showcase.png`} />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:image:alt" content="Description of the image for screen readers" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const isDark =
+          stored === "dark" ||
+          (stored !== "light" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <Analytics />
+    <SpeedInsights />
+  </body>
+</html>

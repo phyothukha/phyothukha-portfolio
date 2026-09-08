@@ -3,36 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "astro dev",
+    "build": "astro build",
+    "start": "astro preview",
     "prepare": "husky && husky install",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.5",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "astro": "^7.3.1",
     "gsap": "^3.12.5",
-    "next": "14.1.1",
-    "next-themes": "^0.3.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-rough-notation": "^1.0.5",
     "sharp": "^0.33.5",
     "swiper": "^11.1.15"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/node": "^22.20.1",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.0.1",
     "eslint": "^8.0.0",
-    "eslint-config-next": "14.1.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "postcss": "^8.0.0",
+    "postcss": "^8.5.28",
     "prettier": "3.2.5",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2"
@@ -41,5 +39,11 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  },
+  "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

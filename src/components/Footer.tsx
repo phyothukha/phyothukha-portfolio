@@ -1,5 +1,4 @@
 import { footerLink } from "@/data/footer";
-import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -17,11 +16,11 @@ const Footer = () => {
       </div>
       <p className="  text-center mt-5">
         Design By{" "}
-        <Link href="/">
+        <a href="/">
           <span className=" dark:text-secondary text-wtsecondary font-light font-Poetsen  cursor-pointer">
             Phyo Thu Kha
           </span>
-        </Link>
+        </a>
       </p>
     </footer>
   );

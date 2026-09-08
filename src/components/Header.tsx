@@ -1,27 +1,30 @@
-"use client";
 import { navlinks } from "@/data/navLinks";
 import useActiveNav from "@/hooks/useActiveNav";
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 const Header = () => {
-  const { setTheme, theme } = useTheme();
-  const themeBtnRef = useRef<HTMLButtonElement>(null);
   const currentNav = useActiveNav("section");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
-    const themeBtn = themeBtnRef.current;
-    if (themeBtn) {
-      themeBtn.ariaLabel = theme ?? "light";
-    }
-  }, [theme]);
+    setTheme(
+      document.documentElement.classList.contains("dark") ? "dark" : "light",
+    );
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.style.colorScheme = next;
+    localStorage.setItem("theme", next);
+  };
 
   return (
     <>
       <header className=" fixed top-0 py-5 backdrop-filter backdrop-blur-[10px] z-50 dark:bg-[rgb(41,47,54,0.3)] bg-[rgba(255,255,255,0.2)] left-0 w-full">
         <div className=" container max-w-6xl flex mx-auto justify-between px-10 lg:px-0 selection:bg-wtsecondary dark:selection:bg-secondary selection:text-primary dark:selection:text-darkary ">
-          <Link
+          <a
             href="/"
             className=" text-xl font-bold font-Poetsen dark:text-white text-black dark:hover:text-secondary hover:text-wtsecondary cursor-pointer transition duration-150 ease hover:scale-95 "
           >
@@ -34,12 +37,12 @@ const Header = () => {
             >
               Thu Kha
             </span>
-          </Link>
+          </a>
           <nav>
             <ul className=" flex gap-8 items-center w-full font-medium">
               {navlinks.map((nav) => (
                 <li key={nav.url} className=" md:inline-block hidden">
-                  <Link
+                  <a
                     href={nav.url}
                     className={` text-black transition duration-100 nav-ani font-semibold font-Poppins   ${
                       currentNav === nav.url.substring(1)
@@ -48,15 +51,15 @@ const Header = () => {
                     }`}
                   >
                     {nav.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
               <li>
                 <button
                   type="button"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  onClick={toggleTheme}
                   title="Toggles light & dark theme"
-                  ref={themeBtnRef}
+                  aria-label={theme}
                   aria-live="polite"
                   className="w-8 h-8 ml-1 rounded-lg flex justify-center items-center link-outline"
                 >
@@ -100,7 +103,7 @@ const Header = () => {
       </header>
       <div className=" backdrop-filter backdrop-blur-[10px] md:hidden flex justify-around rounded-xl overflow-hidden dark:bg-[rgba(0,0,0,0.3)] left-[50%] right-[50%] transform translate-x-[-50%] fixed bottom-5  h-20  z-50 w-[90%]">
         {navlinks.map((nav) => (
-          <Link
+          <a
             key={nav.url}
             href={nav.url}
             className={`dark:text-white dark:hover:text-secondary  hover:text-wtsecondary transition duration-300 text-black text-xs p-3 max-w-xl text-center flex flex-col items-center justify-center ${
@@ -110,7 +113,7 @@ const Header = () => {
           >
             <p className=" text-center">{nav.icons}</p>
             <p>{nav.label}</p>
-          </Link>
+          </a>
         ))}
       </div>
     </>

@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CursorSection from "@/sections/CursorSection";
+import HeroSection from "@/sections/HeroSection";
+import EducationSection from "@/sections/EducationSection";
+import ServiceSection from "@/sections/ServiceSection";
+import ProjectSection from "@/sections/ProjectSection";
+import ContactSection from "@/sections/ContactSection.astro";
+---
+
+<Layout>
+  <CursorSection client:load />
+  <main>
+    <Header client:load />
+    <HeroSection client:load />
+    <EducationSection client:visible />
+    <ServiceSection client:visible />
+    <ProjectSection client:visible />
+    <ContactSection />
+    <Footer client:visible />
+  </main>
+</Layout>

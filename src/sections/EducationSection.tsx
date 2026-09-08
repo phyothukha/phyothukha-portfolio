@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -6,7 +5,9 @@ import timelimebg from "@/assets/timelimebg.svg";
 import timelimebgwt from "@/assets/timelimebg-wt.svg";
 import about from "@/assets/bb.jpg";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const EducationSection = () => {
   const sectionRef = useRef(null);
@@ -91,19 +92,17 @@ const EducationSection = () => {
       className="dark:bg-[#292f36] bg-[#eeeeee] bg-opacity-90 py-20 relative overflow-hidden"
     >
       <div className="absolute top-0 z-10 dark:inline-block hidden">
-        <Image
-          src={timelimebg}
+        <img
+          src={timelimebg.src}
           alt="timeline background"
           className="max-w-none object-cover object-center w-[2000px] h-auto"
-          priority
         />
       </div>
       <div className="absolute top-0 z-10 dark:hidden inline-block">
-        <Image
-          src={timelimebgwt}
+        <img
+          src={timelimebgwt.src}
           alt="timeline white background"
           className="max-w-none object-cover object-center w-[2000px] h-auto"
-          priority
         />
       </div>
       <div className="container mx-auto max-w-7xl relative z-30 lg:px-0 px-10">
@@ -152,8 +151,8 @@ const EducationSection = () => {
                 ref={imageRef}
                 className="overflow-hidden h-full w-full bg-primary border-2 border-wtsecondary dark:border-secondary rounded-xl cursor-pointer transition duration-500 ease-in-out"
               >
-                <Image
-                  src={about}
+                <img
+                  src={about.src}
                   alt="about me"
                   width={800}
                   className="mx-auto object-cover md:object-bottom h-[400px] w-[400px] md:w-[500px]"

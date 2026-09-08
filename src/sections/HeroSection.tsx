@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import phyothukha from "@/assets/phyothukha.png";
-import Image from "next/image";
-import Link from "next/link";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -90,7 +90,7 @@ const HeroSection = () => {
               learning new technologies, and solving user problems effectively.
             </p>
             <div ref={buttonsRef} className="flex gap-3 mt-5 justify-start">
-              <Link
+              <a
                 href={"#contact"}
                 className="btn bg-wtsecondary dark:bg-secondary dark:text-black text-white before:bg-purple-500"
                 style={{
@@ -98,19 +98,18 @@ const HeroSection = () => {
                 }}
               >
                 Contact Me
-              </Link>
+              </a>
               <button className="btn bg-transparent border-wtsecondary dark:border-secondary text-wtsecondary dark:text-secondary border-2 dark:before:bg-secondary before:bg-wtsecondary">
                 Download CV
               </button>
             </div>
           </article>
           <aside className="dark:bg-secondary bg-wtsecondary bg-opacity-70 lg:w-[450px] w-[300px] h-[300px] lg:h-[450px] rounded-full transition ease-in-out duration-500 cursor-pointer overflow-hidden dark:shadow-3xl shadow-5xl hover:shadow-6xl dark:hover:shadow-4xl">
-            <Image
-              src={phyothukha}
+            <img
+              src={phyothukha.src}
               draggable={false}
               className="mt-20 select-none object-contain mx-auto lg:w-[400px] w-[250px] h-[250px] lg:h-[400px]"
               alt="Phyo Thu Kha photo"
-              priority
             />
           </aside>
         </div>
